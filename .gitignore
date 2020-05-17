@@ -1,0 +1,4 @@
+node_modules
+mongo-volume
+home
+# TODO: add files init-mongo and .env(now not exist)

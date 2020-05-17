@@ -1,0 +1,23 @@
+{
+  "name": "docker-node-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --watch src src/index.js",
+    "compose:dev": "sudo rm -rf ./mongo-volume && mkdir ./mongo-volume && docker-compose -f docker-compose.dev.yml up",
+    "compose:clear": "docker-compose down && docker image rm docker-db_app",
+    "create:mongodir": "mkdir -p ./home/mongodb && touch ./home/mongodb/.dbshell && sudo chown -R 999:999 ./home/mongodb"
+  },
+  "keywords": [],
+  "author": "Alexey Zaycev",
+  "license": "ICS",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
