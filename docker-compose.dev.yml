@@ -11,7 +11,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - '8080:8000'
+      - '${LOCAL_APP_PORT}:${PORT}'
     links:
       - mongo
     depends_on:
@@ -20,13 +20,13 @@ services:
     container_name: mongo
     image: mongo
     environment:
-      - MONGO_INITDB_DATABASE=test
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes: 
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
       - ./home/mongodb:/home/mongodb
     ports:
-      - '27017:27017'
+      - '${LOCAL_MONGO_PORT}:27017'
 

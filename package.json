@@ -2,10 +2,13 @@
   "name": "docker-node-mongo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon --watch src src/index.js",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "nodemon",
     "compose:dev": "sudo rm -rf ./mongo-volume && mkdir ./mongo-volume && docker-compose -f docker-compose.dev.yml up",
     "compose:clear": "docker-compose down && docker image rm docker-db_app",
     "create:mongodir": "mkdir -p ./home/mongodb && touch ./home/mongodb/.dbshell && sudo chown -R 999:999 ./home/mongodb"
@@ -14,10 +17,18 @@
   "author": "Alexey Zaycev",
   "license": "ICS",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.14"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.6",
+    "@types/mongoose": "^5.7.20",
+    "@types/node": "^14.0.1",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
   }
 }
